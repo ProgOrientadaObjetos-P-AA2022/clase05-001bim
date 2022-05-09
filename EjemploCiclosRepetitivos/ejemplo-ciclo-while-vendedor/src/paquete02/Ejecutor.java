@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package paqueteuno;
+package paquete02;
 
 import java.util.Scanner;
 
@@ -18,9 +18,11 @@ public class Ejecutor {
         boolean bandera;
         String opcion;
         Scanner entrada = new Scanner(System.in);
-
+        String cadenaFinal;
         // Inicio de proceso iterativo 
         bandera = true;
+        cadenaFinal = ""; // inicializo la variable que contendrá la cadena
+        // final.
         while (bandera) { // bandera == true
             System.out.println("Ingrese el nombre del vendedor");
             nombre = entrada.nextLine();
@@ -34,23 +36,28 @@ public class Ejecutor {
             // con los datos ingresados se crea el objeto de tipo Vendedor
             Vendedor v = new Vendedor(nombre, edad, sMinino, autos);
             v.calcularPagoMensual();
-            System.out.printf("Datos de Vendedor\n"
+            cadenaFinal = String.format("%sDatos de Vendedor\n"
                     + "Nombre: %s\n"
                     + "Edad: %s\n"
                     + "Salario mínimo: %.2f\n"
                     + "Número de autos: %d\n"
-                    + "Pago mensual: %.2f\n", v.obtenerNombres(), v.obtenerEdad(),
+                    + "Pago mensual: %.2f\n\n",
+                    cadenaFinal,
+                    v.obtenerNombres(), v.obtenerEdad(),
                     v.obtenerSalarioMinimo(), v.obtenerNumeroAutos(),
                     v.obtenerPagoMensual());
 
             entrada.nextLine(); // limpieza del buffer
             System.out.println("Desea ingresar más vendedores. Ingrese n para"
-                    + "salir");
+                    + " salir");
             opcion = entrada.nextLine();
             if (opcion.equals("n")) {
                 bandera = false;
             }
 
         }
+        // cuando se sale del ciclo repetitivo debemos presentar en pantalla
+        // el valor de cadena final
+        System.out.printf("%s\n", cadenaFinal);
     }
 }
